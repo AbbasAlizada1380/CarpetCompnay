@@ -107,7 +107,7 @@ const Sidebar = ({ setActiveComponent }) => {
     >
       <header className="flex items-center gap-5 p-5 text-white font-bold text-xl">
         <div className="flex items-center justify-center p-1 bg-white rounded-full">
-          <img src="/logo.png" alt="Logo" className="h-10 w-10" />
+          <img src="/logo.jpg" alt="Logo" className="h-10 w-10" />
         </div>
 
         <span className="text-lg font-semibold  text-white whitespace-nowrap">

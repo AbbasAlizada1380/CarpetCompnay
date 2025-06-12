@@ -1,0 +1,18 @@
+{% load static tailwind_tags %}
+...
+<head>
+   ...
+   {% tailwind_css %}
+   ...
+</head> 
+
+
+{
+  "id": 1,
+  "floor": 1, 
+  "time": "Morning",
+  "customers_list": [
+    {"customer_id": 1, "amount": 1000, "reminder": 0.00},
+    {"customer_id": 2, "amount": 5000, "reminder": 0.00}
+  ],
+}
