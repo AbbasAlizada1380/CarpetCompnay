@@ -1,18 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 
-from .models import Expenditure, Income
-from .serializers import ExpenditureSerializer, IncomeSerializer
-
-
-class ExpenditureListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Expenditure.objects.all()
-    serializer_class = ExpenditureSerializer
-
-
-class ExpenditureRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Expenditure.objects.all()
-    serializer_class = ExpenditureSerializer
+from .models import Income
+from .serializers import IncomeSerializer
 
 
 class IncomeListCreateAPIView(generics.ListCreateAPIView):
