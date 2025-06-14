@@ -28,16 +28,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-LOCAL_APPS = [
-    "apps.customers",
-    "apps.agreement",
-    "apps.rent",
-    "apps.services",
-    "apps.staff",
-    "apps.users",
-    "apps.expenditure",
-    "apps.units.apps.UnitsConfig",
-]
+LOCAL_APPS = ["apps.staff", "apps.users", "apps.expenditure", "apps.carpet"]
 
 THIRD_PARTY_APPS = [
     "jazzmin",
@@ -128,7 +119,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 MEDIA_URL = "media/"
-MEDIA_URL = "media/" # Note: Duplicate line was present in your original
+MEDIA_URL = "media/"  # Note: Duplicate line was present in your original
 MEDIA_ROOT = BASE_DIR / "media/"
 
 # Default primary key field type
@@ -146,14 +137,14 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-# REST_FRAMEWORK = {
-#     "DEFAULT_AUTHENTICATION_CLASSES": (
-#         "rest_framework_simplejwt.authentication.JWTAuthentication",
-#     ),
-#     "DEFAULT_PERMISSION_CLASSES": [
-#         "rest_framework.permissions.IsAuthenticated",
-#     ],
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
 
 
 SIMPLE_JWT = {

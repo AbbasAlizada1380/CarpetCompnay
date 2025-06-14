@@ -8,10 +8,10 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Tamadon MIS system Backend APIs",
+        title="Carpet Company",
         default_version="v1",
         description=(
-            "This is the API documentation for TESOl LMS project APIs.\n\n"
+            "This is the API documentation for Carpet Company project APIs.\n\n"
             "Contacts:\n"
             "- Ali Sina Sultani: alisinasultani@gmail.com\n"
             "- Abbas Alizadah: abbas.alizadah1380@gmail.com \n"
@@ -30,13 +30,9 @@ urlpatterns = [
     path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("admin/", admin.site.urls),
-    path("api/", include("apps.customers.urls")),
-    path("", include("apps.agreement.urls")),  # Keep agreement at the root
-    path("rent/", include("apps.rent.urls")),
-    path("services/", include("apps.services.urls")),
     path("staff/", include("apps.staff.urls")),
     path("users/", include("apps.users.urls")),
-    path("units/", include("apps.units.urls")),
+    path("carpet/", include("apps.carpet.urls")),
     path("Expenditure/", include("apps.expenditure.urls")),
     path("api-auth/", include("rest_framework.urls")),
 ]
