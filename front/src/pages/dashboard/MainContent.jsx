@@ -3,7 +3,6 @@ import Dashboard from "./pages/dashboard";
 // import S_Transaction from "./pages/RentManager";
 import Report from "./pages/reports";
 import Setting from "./pages/setting";
-import Shopkeepers from "./pages/ShopKeepers";
 import StaffManager from "./pages/StaffManager";
 import Incomes from "./pages/incomes";
 import Expenses from "./pages/Expenses";
@@ -15,6 +14,8 @@ import Residentialunites from "./pages/ResidentialUnites";
 import Financial from "./pages/Financial";
 import SendingCarpets from "./pages/SendingCarpets";
 import Importing from "./pages/Importing";
+import Workers from "./pages/Workers";
+import ProcessingCarpets from "./pages/ProcessingCarpets";
 const MainContent = ({ activeComponent }) => {
   const renderContent = () => {
     switch (activeComponent) {
@@ -34,8 +35,8 @@ const MainContent = ({ activeComponent }) => {
         return <Setting />;
       case "SendingCarpets":
         return <SendingCarpets />;
-      case "Shopkeepers":
-        return <Shopkeepers />;
+      case "Workers":
+        return <Workers />;
       case "Blockes":
         return <Residentialunites />;
       case "StafFManager":
@@ -48,8 +49,8 @@ const MainContent = ({ activeComponent }) => {
         return <Financial />;
       case "CreateUsers":
         return <CreateUser />;
-      case "BlockesServices":
-        return <BlockManager />;
+      case "ProcessingCarpets":
+        return <ProcessingCarpets />;
       case "RentManger":
         return <Rent />;
       default:

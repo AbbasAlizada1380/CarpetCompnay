@@ -45,10 +45,18 @@ const Sidebar = ({ setActiveComponent }) => {
 
   const AllComponents = [
     { name: "صفحه اصلی", value: "home", icon: <LuActivity /> },
-    // { name: "دوکان‌دار ها", value: "Shopkeepers", icon: <LuUserRoundPlus /> },
-    { name: " وارده", value: "Importing", icon: <FaBuilding /> }, 
-    { name: "قالین های صادره", value: "SendingCarpets", icon: <MdLocalLaundryService /> },
-    // { name: "کرایه‌", value: "RentManger", icon: <GiTakeMyMoney /> },
+    { name: "اجاره کارها", value: "Workers", icon: <LuUserRoundPlus /> },
+    {
+      name: "قالین های تحت کار",
+      value: "ProcessingCarpets",
+      icon: <GiTakeMyMoney />,
+    },
+    { name: " قالین های وارده", value: "Importing", icon: <FaBuilding /> },
+    {
+      name: "قالین های صادره",
+      value: "SendingCarpets",
+      icon: <MdLocalLaundryService />,
+    },
     { name: "کارمندان", value: "StafFManager", icon: <FaUserGear /> },
     { name: "معاشات", value: "Salaries", icon: <FaBuilding /> },
     { name: "مصارف", value: "Expenses", icon: <MdLocalLaundryService /> },
@@ -111,7 +119,7 @@ const Sidebar = ({ setActiveComponent }) => {
         </div>
 
         <span className="text-lg font-semibold  text-white whitespace-nowrap">
-           شرکت قالین مزار سنتر
+          شرکت قالین مزار سنتر
         </span>
       </header>
 

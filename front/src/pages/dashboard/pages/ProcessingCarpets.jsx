@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Agent = () => {
+const ProcessingCarpets = () => {
   const [agents, setAgents] = useState([
     {
       id: 1,
@@ -163,4 +163,4 @@ const Agent = () => {
   );
 };
 
-export default Agent;
+export default ProcessingCarpets;
