@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react"; // Import useMemo
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useSelector } from "react-redux";
 import moment from "moment-jalaali";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -12,6 +11,7 @@ import FilterSalaries from "./FilterSalaries"; // Adjust path as needed
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_URL = `${BASE_URL}/staff/salaries/`;
@@ -38,6 +38,7 @@ const years = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
 
 const Salaries = () => {
   const role = useSelector((state) => state.user.currentUser.role[0]);
+  const { currentUser, accessToken } = useSelector((state) => state.user);
   const [salaries, setSalaries] = useState([]);
   const [data, setData] = useState(null); // Initialize data to null or an empty object if preferred
   const [formData, setFormData] = useState({
@@ -67,7 +68,11 @@ const Salaries = () => {
 
   const fetchSalaries = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       setSalaries(response.data);
     } catch (error) {
       console.error("Error fetching salaries:", error);
@@ -93,10 +98,18 @@ const Salaries = () => {
     };
     try {
       if (editingId) {
-        await axios.put(`${API_URL}${editingId}/`, dataToSend); // Use prepared data
+        await axios.put(`${API_URL}${editingId}/`, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }); // Use prepared data
         toast.success("لیست معاشات با موفقیت ویرایش شد.");
       } else {
-        await axios.post(API_URL, dataToSend); // Use prepared data
+        await axios.post(API_URL, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }); // Use prepared data
         toast.success("لیست معاشات جدید با موفقیت اضافه شد.");
       }
       fetchSalaries(); // Refetch
@@ -163,7 +176,11 @@ const Salaries = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${API_URL}${id}/`);
+          await axios.delete(`${API_URL}${id}/`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
           fetchSalaries(); // Refetch
           toast.success("لیست معاشات مورد نظر حذف گردید.");
         } catch (error) {

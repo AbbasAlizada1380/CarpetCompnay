@@ -3,26 +3,25 @@ import Dashboard from "./pages/dashboard";
 // import S_Transaction from "./pages/RentManager";
 import Report from "./pages/reports";
 import Setting from "./pages/setting";
-// import RentManager from "./pages/RentManager";
-import ServiceManager from "./pages/ServiceManger";
 import Shopkeepers from "./pages/ShopKeepers";
 import StaffManager from "./pages/StaffManager";
 import Incomes from "./pages/incomes";
 import Expenses from "./pages/Expenses";
 import BlockManager from "./pages/BlockManger";
-import Agreements from "./pages/Agreements";
 import Salaries from "./pages/Salaries";
 import Rent from "./pages/RentManager";
 import CreateUser from "./pages/CreaateUsers";
 import Residentialunites from "./pages/ResidentialUnites";
 import Financial from "./pages/Financial";
+import SendingCarpets from "./pages/SendingCarpets";
+import Importing from "./pages/Importing";
 const MainContent = ({ activeComponent }) => {
   const renderContent = () => {
     switch (activeComponent) {
       case "dashboard":
         return <Dashboard />;
-      case "Agreements":
-        return <Agreements />;
+      case "Importing":
+        return <Importing />;
       case "BlockManager":
         return <BlockManager />;
       case "user managements":
@@ -33,8 +32,8 @@ const MainContent = ({ activeComponent }) => {
         return <Salaries />;
       case "setting":
         return <Setting />;
-      case "ServiceManager":
-        return <ServiceManager />;
+      case "SendingCarpets":
+        return <SendingCarpets />;
       case "Shopkeepers":
         return <Shopkeepers />;
       case "Blockes":

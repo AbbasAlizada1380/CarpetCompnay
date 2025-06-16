@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 import { FaRegEdit, FaSearch } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import {
@@ -36,7 +37,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL || "http://127.0.0.1:8000";
 // *** Common names are 'created_at', 'date_joined'. Adjust the field name ***
 // *** in the table section below if yours is different. ***
 const API_URL = `${BASE_URL}/staff/staff/`;
-const itemsPerPage =15;
+const itemsPerPage = 15;
 
 const StaffManager = () => {
   const [staffData, setStaffData] = useState({
@@ -49,6 +50,7 @@ const StaffManager = () => {
     status: "",
     // Assuming 'created_at' is not part of the form data itself
   });
+  const { currentUser, accessToken } = useSelector((state) => state.user);
   const [selectedPhotoFile, setSelectedPhotoFile] = useState(null);
   const [currentPhotoUrl, setCurrentPhotoUrl] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -74,7 +76,11 @@ const StaffManager = () => {
   const fetchStaff = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       // Ensure response.data includes the creation date field from the backend
       setStaffList(response.data || []);
     } catch (error) {
@@ -168,7 +174,9 @@ const StaffManager = () => {
         method,
         url,
         data: formDataToSend,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       await fetchStaff();
       toast.success(`کارمند با موفقیت ${editingId ? "بروزرسانی" : "ثبت"} شد.`);
@@ -235,7 +243,11 @@ const StaffManager = () => {
       if (result.isConfirmed) {
         setIsLoading(true);
         try {
-          await axios.delete(`${API_URL}${id}/`);
+          await axios.delete(`${API_URL}${id}/`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
           await fetchStaff();
           toast.success("کارمند با موفقیت حذف شد.");
         } catch (error) {
@@ -789,7 +801,7 @@ const StaffManager = () => {
                     {positionLabel}
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap text-gray-700">
-                    {staff.salary} 
+                    {staff.salary}
                   </td>
                   <td className="px-4 py-2 whitespace-nowrap">
                     {" "}

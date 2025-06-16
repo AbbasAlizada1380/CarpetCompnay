@@ -41,6 +41,7 @@ const years = Array.from({ length: 1420 - 1400 + 1 }, (_, i) => 1400 + i);
 
 const Expenses = () => {
   const role = useSelector((state) => state.user.currentUser.role[0]);
+  const { currentUser, accessToken } = useSelector((state) => state.user);
   const [expenses, setExpenses] = useState([]);
   const [formData, setFormData] = useState({
     floor: "",
@@ -72,7 +73,11 @@ const Expenses = () => {
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
       setExpenses(response.data);
     } catch (error) {
       console.error("خطا در دریافت اطلاعات مصارف:", error);
@@ -90,10 +95,18 @@ const Expenses = () => {
     const dataToSend = { ...formData };
     try {
       if (editingId) {
-        await axios.put(`${API_URL}${editingId}/`, dataToSend);
+        await axios.put(`${API_URL}${editingId}/`, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         toast.success("مصرف با موفقیت ویرایش شد.");
       } else {
-        await axios.post(API_URL, dataToSend);
+        await axios.post(API_URL, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         toast.success("مصرف جدید با موفقیت اضافه شد.");
       }
       fetchExpenses();
@@ -153,7 +166,11 @@ const Expenses = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${API_URL}${id}/`);
+          await axios.delete(`${API_URL}${id}/`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
           fetchExpenses();
           toast.success("مصرف مورد نظر با موفقیت حذف گردید.");
         } catch (error) {

@@ -6,10 +6,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useSelector } from "react-redux";
 // Import the new filter component
 import FilterIncomes from "./FilterIncomes"; // Adjust path as needed
-import { useSelector } from "react-redux";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const API_URL = `${BASE_URL}/Expenditure/income/`;
@@ -37,6 +36,7 @@ const years = Array.from({ length: 11 }, (_, i) => currentYear - 5 + i);
 const Incomes = () => {
   const role = useSelector((state) => state.user.currentUser.role[0]);
   const [incomes, setIncomes] = useState([]);
+  const { currentUser, accessToken } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     source: "",
     amount: "",
@@ -66,7 +66,11 @@ const Incomes = () => {
 
   const fetchIncomes = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       setIncomes(response.data);
     } catch (error) {
       console.error("خطا در دریافت اطلاعات درآمد:", error);
@@ -90,10 +94,18 @@ const Incomes = () => {
     };
     try {
       if (editingId) {
-        await axios.put(`${API_URL}${editingId}/`, dataToSend); // or formData
+        await axios.put(`${API_URL}${editingId}/`, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }); // or formData
         toast.success("درآمد با موفقیت ویرایش شد.");
       } else {
-        await axios.post(API_URL, dataToSend); // or formData
+        await axios.post(API_URL, dataToSend, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }); // or formData
         toast.success("درآمد جدید با موفقیت اضافه شد.");
       }
       fetchIncomes(); // Refetch
@@ -153,7 +165,11 @@ const Incomes = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${API_URL}${id}/`);
+          await axios.delete(`${API_URL}${id}/`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
           fetchIncomes(); // Refetch
           toast.success("درآمد مورد نظر با موفقیت حذف گردید.");
         } catch (error) {
