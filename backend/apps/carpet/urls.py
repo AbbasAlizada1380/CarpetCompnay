@@ -6,6 +6,7 @@ from .views import ExportCarpetViewSet
 
 router = DefaultRouter()
 router.register("carpets", ExportCarpetViewSet, basename="carpet")
+router.register("import", ExportCarpetViewSet, basename="import")
 
 urlpatterns = [
     path("", include(router.urls)),

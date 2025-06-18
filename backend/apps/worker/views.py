@@ -9,6 +9,16 @@ class ProcessingCarpetListView(generics.ListCreateAPIView):
     serializer_class = ProcessingCarpetSerializer
 
 
+class ProcessingCarpetUpdatedDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProcessingCarpet.objects.all()
+    serializer_class = ProcessingCarpetSerializer
+
+
 class WorkerListView(generics.ListCreateAPIView):
+    queryset = Worker.objects.all()
+    serializer_class = WorkerSerializer
+
+
+class WorkerUpdatedReView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Worker.objects.all()
     serializer_class = WorkerSerializer

@@ -23,10 +23,8 @@ class ProcessingCarpet(models.Model):
     width = models.CharField(max_length=255)
     length = models.CharField(max_length=255)
     map = models.TextField()
-    material = ArrayField(models.CharField(max_length=255), blank=True, default=list)
-    money = ArrayField(
-        models.DecimalField(max_digits=10, decimal_places=2), blank=True, default=list
-    )
+    material = models.JSONField(default=list, blank=True)
+    money = models.JSONField(default=list, blank=True)
 
     def __str__(self):
         return f"{self.width} -- {self.length}"
