@@ -1,7 +1,6 @@
+import os
 from datetime import timedelta
 from pathlib import Path
-
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +27,13 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-LOCAL_APPS = ["apps.staff", "apps.users", "apps.expenditure", "apps.carpet"]
+LOCAL_APPS = [
+    "apps.staff",
+    "apps.users",
+    "apps.expenditure",
+    "apps.carpet",
+    "apps.worker",
+]
 
 THIRD_PARTY_APPS = [
     "jazzmin",
@@ -79,6 +84,8 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
 
 AUTH_USER_MODEL = "users.User"
 
@@ -154,7 +161,6 @@ SIMPLE_JWT = {
     ),
     "ACCESS_TOKEN_LIFETIME": timedelta(days=2),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
-    "SIGNING_KEY": config("SIGNING_KEY"),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
 }
@@ -177,13 +183,3 @@ DJOSER = {
         "user_delete": "djoser.serializers.UserDeleteSerializer",
     },
 }
-
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = config("EMAIL_HOST")
-EMAIL_PORT = config("EMAIL_PORT", cast=int)
-EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
-ADMIN_URL = "supersecret"
